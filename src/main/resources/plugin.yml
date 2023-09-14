@@ -1,0 +1,5 @@
+name: zBoss
+version: '${project.version}'
+main: ru.zunowskie.zboss.ZBoss
+commands:
+  zboss:
