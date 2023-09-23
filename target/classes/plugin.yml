@@ -1,5 +1,0 @@
-name: zBoss
-version: '1.0'
-main: ru.zunowskie.zboss.ZBoss
-commands:
-  zboss:

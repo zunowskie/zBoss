@@ -29,7 +29,6 @@ public class BossSpawn implements Listener {
     private static List<LivingEntity> bosses = new ArrayList<>();
     private static List<String> bossNames = new ArrayList<>();
 
-
     private static int currentBossIndex = 0;
 
     private static int taskId;
@@ -79,7 +78,6 @@ public class BossSpawn implements Listener {
         }
 
 
-
         String worldName = var[0];
         double x = Double.parseDouble(var[1]);
         double y = Double.parseDouble(var[2]);
@@ -95,8 +93,7 @@ public class BossSpawn implements Listener {
             return;
         }
 
-        if (Bukkit.getWorld(worldName).getEntities().stream()
-                .anyMatch(entity -> entity.hasMetadata("zboss"))) {
+        if (Bukkit.getWorld(worldName).getEntities().stream().anyMatch(entity -> entity.hasMetadata("zboss"))) {
             Bukkit.getLogger().warning("Босс уже жив!");
             return;
         }
@@ -158,14 +155,7 @@ public class BossSpawn implements Listener {
                 p.sendMessage(statsMessage);
             }
 
-            BossBarManager.displayBossBar(ZBoss.getInstance().getConfig().getString("settings.bossbar.name")
-                            .replace("%x%", String.valueOf(location.getBlockX()))
-                            .replace("%y%", String.valueOf(location.getBlockY()))
-                            .replace("%z%", String.valueOf(location.getBlockZ()))
-                            .replace("&", "§")
-                            .replace("%name%", currentBossName),
-                    BarColor.valueOf(ZBoss.getInstance().getConfig().getString("settings.bossbar.color")),
-                    BarStyle.valueOf(ZBoss.getInstance().getConfig().getString("settings.bossbar.style")));
+            BossBarManager.displayBossBar(ZBoss.getInstance().getConfig().getString("settings.bossbar.name").replace("%x%", String.valueOf(location.getBlockX())).replace("%y%", String.valueOf(location.getBlockY())).replace("%z%", String.valueOf(location.getBlockZ())).replace("&", "§").replace("%name%", currentBossName), BarColor.valueOf(ZBoss.getInstance().getConfig().getString("settings.bossbar.color")), BarStyle.valueOf(ZBoss.getInstance().getConfig().getString("settings.bossbar.style")));
 
             currentBossIndex++;
             if (currentBossIndex >= bosses.size()) {
@@ -197,24 +187,21 @@ public class BossSpawn implements Listener {
 
                     if (firstPlace != null) {
                         deathMessage = deathMessage.replaceAll("%player1%", firstPlace.getDisplayName());
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ZBoss.getInstance().getConfig().getString("commands.player1")
-                                .replace("%player%", firstPlace.getDisplayName()));
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ZBoss.getInstance().getConfig().getString("commands.player1").replace("%player%", firstPlace.getDisplayName()));
                     } else {
                         deathMessage = deathMessage.replaceAll("%player1%", "§eНе найден");
                     }
 
                     if (secondPlace != null) {
                         deathMessage = deathMessage.replaceAll("%player2%", secondPlace.getDisplayName());
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ZBoss.getInstance().getConfig().getString("commands.player2")
-                                .replace("%player%", secondPlace.getDisplayName()));
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ZBoss.getInstance().getConfig().getString("commands.player2").replace("%player%", secondPlace.getDisplayName()));
                     } else {
                         deathMessage = deathMessage.replaceAll("%player2%", "§eНе найден");
                     }
 
                     if (thirdPlace != null) {
                         deathMessage = deathMessage.replaceAll("%player3%", thirdPlace.getDisplayName());
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ZBoss.getInstance().getConfig().getString("commands.player3")
-                                .replace("%player%", thirdPlace.getDisplayName()));
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ZBoss.getInstance().getConfig().getString("commands.player3").replace("%player%", thirdPlace.getDisplayName()));
                     } else {
                         deathMessage = deathMessage.replaceAll("%player3%", "§eНе найден");
                     }
@@ -227,7 +214,7 @@ public class BossSpawn implements Listener {
                     Bukkit.getScheduler().cancelTask(taskId);
                     taskId = 0;
                 }
-            }, 0, 10);
+            }, 0, 25);
         } else {
             Bukkit.getLogger().warning("§6§lzBoss: §fНе удалось создать ни одного босса.");
         }
